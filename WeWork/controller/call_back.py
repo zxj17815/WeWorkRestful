@@ -20,7 +20,10 @@ import xml.etree.ElementTree as ET
 
 async def call_back_get(request):
     print(request)
-    data = request.GET.dict()
+    data = {'msg_signature': request.args.get("msg_signature"),
+            'timestamp': request.args.get("timestamp"),
+            'nonce': request.args.get("nonce"),
+            }
     return json(tool.call_back_verify(data, 'sap'))
 
 

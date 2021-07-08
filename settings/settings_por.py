@@ -10,7 +10,6 @@
 
 
 class Settings:
-    SAP_URL = 'http://116.62.212.230:8089/'  # SAP接口地址
     SAP_CARD_CODE = "108000076"  # SAP销售订单同样客户编码
     CELERY_COON = 'redis://:@localhost:6379/3'  # redis 地址
 
@@ -20,7 +19,7 @@ class Settings:
         'we_chat_app': 'mysql://root:futurestitch,.db!@localhost/admin?charset=utf8',
         'oms': 'mysql://root:futurestitch,.db!@127.0.0.1/fs_oms?charset=utf8mb4',
         'tiny': 'mysql://root:futurestitch,.db!@127.0.0.1/tiny?charset=utf8mb4',
-        'sap': 'mssql+pyodbc://sa:Zy2017@116.62.212.230:1433/ZY_NEW_TEST?driver=ODBC+Driver+13+for+Sql+Server',
+        'sap': 'mssql+pyodbc://sa:Zy2017@116.62.212.231:1433/ZY_NEW_TEST?driver=ODBC+Driver+13+for+Sql+Server',
         'warehouse': 'mysql://root:futurestitch,.db!@127.0.0.1/fs_warehouse?charset=utf8mb4'
     }
     WE_WORK_CORP_ID = 'ww582b4a963cca41a6'  # 企业微信公司id

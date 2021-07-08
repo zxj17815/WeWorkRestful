@@ -6,14 +6,14 @@
 @Author  :   JayZhang 
 @Version :   1.0
 @Contact :   597952291@qq.com
-@License :   (C)Copyright 2021, Liugroup-NLPR-CASIA
+@License :   (C)Copyright 2021, iceiceice
 @Desc    :   蓝图入口
 '''
 
 # here put the import lib
 from sanic.response import json
 from sanic import Blueprint
-from .controller import call_back
+from .controller import call_back, attendance, department
 
 
 # here put the main code
@@ -36,4 +36,17 @@ bp.add_route(
     call_back.call_back_post,
     '/call_back',
     methods=["post"],
+)
+
+
+bp.add_route(
+    attendance.get_all_attendance,
+    '/get_all_attendance',
+    methods=["get"]
+)
+
+bp.add_route(
+    department.get_all_department,
+    '/get_all_department',
+    methods=["get"]
 )

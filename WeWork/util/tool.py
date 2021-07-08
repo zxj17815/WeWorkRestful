@@ -434,6 +434,7 @@ def call_back_verify(data, appname=None, url=None):
         echostr = data['echostr']
         ret, sReplyEchoStr = WXBizMsgCrypt3.WXBizMsgCrypt(call_back_token, call_back_key, CORPID).VerifyURL(
             msg_signature, timestamp, nonce, echostr)
+        print('ret',ret, sReplyEchoStr)
         return sReplyEchoStr
     except Exception as e:
         print(e)

@@ -6,7 +6,7 @@
 @Author  :   JayZhang 
 @Version :   1.0
 @Contact :   597952291@qq.com
-@License :   (C)Copyright 2021, MIT
+@License :   (C)Copyright 2021, iceiceice
 @Desc    :   None
 '''
 
@@ -17,6 +17,12 @@ from sanic import Sanic
 from helper import HttpResponse
 from sanic_openapi import swagger_blueprint
 from WeWork.app import bp as we_work_bp
+from OA.app import bp as oa_bp
+from contextvars import ContextVar
+
+# from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import sessionmaker
+from OA.database import bind
 
 
 # here put the main code
@@ -26,14 +32,32 @@ app.blueprint(swagger_blueprint)
 
 app.blueprint(we_work_bp)
 
+app.blueprint(oa_bp)
+
 print("app mode: {}".format(app.config.MODE))
 
 
-@app.get("/")
+@app.get("/test")
 async def hello_world(request):
-    print(request.ctx.user)
+    # print(request.ctx.user)
     return HttpResponse.ok({"say": "Hello, world."})
 
+
+_base_model_session_ctx = ContextVar("session")
+
+
+@app.middleware("request")
+async def inject_session(request):
+    request.ctx.session = sessionmaker(bind)()
+    request.ctx.session_ctx_token = _base_model_session_ctx.set(
+        request.ctx.session)
+
+
+@app.middleware("response")
+async def close_session(request, response):
+    if hasattr(request.ctx, "session_ctx_token"):
+        _base_model_session_ctx.reset(request.ctx.session_ctx_token)
+        request.ctx.session.close()
 
 # async def notify_server_started_after_five_seconds(t):
 #     await asyncio.sleep(t)

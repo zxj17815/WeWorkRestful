@@ -6,7 +6,7 @@
 @Author  :   JayZhang 
 @Version :   1.0
 @Contact :   597952291@qq.com
-@License :   (C)Copyright 2021, Liugroup-NLPR-CASIA
+@License :   (C)Copyright 2021, iceiceice
 @Desc    :   启动文件
 '''
 
